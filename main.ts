@@ -115,7 +115,7 @@ controller.down.onEvent(ControllerButtonEvent.Released, function () {
     }
     //princess.setImage(assets.image`princess_facing_down`)
 })
-controller.A.onEvent(ControllerButtonEvent.Pressed,function(){
+controller.B.onEvent(ControllerButtonEvent.Pressed,function(){
 if (direction == 1) {
     let interactbox = sprites.create(assets.image`myImage`, SpriteKind.Projectile)
     interactbox.lifespan = 500
@@ -151,7 +151,7 @@ sprites.onOverlap(SpriteKind.Projectile,SpriteKind.box1,function(sprite:Sprite,o
     pause(300)
     game.showLongText("You got a key. How convenient.",DialogLayout.Bottom)
 })
-
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.lockeddoor, opendoor2)
 //functions
 function opendoor1(sprite:Sprite,otherSprite:Sprite) {
     sprites.destroy(otherSprite)
@@ -162,8 +162,18 @@ function opendoor1(sprite:Sprite,otherSprite:Sprite) {
     tiles.setWallAt(tiles.getTileLocation(53, 10), false)
     music.play(music.melodyPlayable(music.smallCrash), music.PlaybackMode.UntilDone)
 }
-function opendoor2() {
-
+function opendoor2(sprite:Sprite,otherSprite:Sprite) {
+    if (key){
+        sprites.destroy(otherSprite)
+        sprites.destroy(sprite)
+        tiles.setTileAt(tiles.getTileLocation(50,8),assets.image`opendoor`)
+        tiles.setTileAt(tiles.getTileLocation(50, 7), assets.image`opendoor`)
+        tiles.setWallAt(tiles.getTileLocation(50,7),false)
+        tiles.setWallAt(tiles.getTileLocation(50, 8), false)
+    }
+    else{
+        game.showLongText("locked...",DialogLayout.Bottom)
+    }
 }
 function burndoor3() {
 
