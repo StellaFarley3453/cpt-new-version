@@ -119,22 +119,95 @@ c c c c c c c c c c c c c c c c
 `;
             case "image7":
             case "myImage":return img`
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 a 1 1 1 1 1 2 2 1 1 1 1 1 a 3 
+3 1 a 1 1 1 1 2 2 1 1 1 1 a 1 3 
+3 1 1 a 1 1 1 2 2 1 1 1 a 1 1 3 
+3 1 1 1 a 1 1 2 2 1 1 a 1 1 1 3 
+3 1 1 1 1 a 1 2 2 1 a 1 1 1 1 3 
+3 1 1 1 1 1 a 2 2 a 1 1 1 1 1 3 
+3 9 9 9 9 9 9 2 2 9 9 9 9 9 9 3 
+3 9 9 9 9 9 9 2 2 9 9 9 9 9 9 3 
+3 1 1 1 1 1 a 2 2 a 1 1 1 1 1 3 
+3 1 1 1 1 a 1 2 2 1 a 1 1 1 1 3 
+3 1 1 1 a 1 1 2 2 1 1 a 1 1 1 3 
+3 1 1 a 1 1 1 2 2 1 1 1 a 1 1 3 
+3 1 a 1 1 1 1 2 2 1 1 1 1 a 1 3 
+3 a 1 1 1 1 1 2 2 1 1 1 1 1 a 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+`;
+            case "image8":
+            case "opendoor":return img`
+c b b b b b b b b b b b b b b c 
+c b b b b b b b b b b b b b b c 
+c d d d d d d d d d d d d d d c 
+c d d d d d d d d d d d d d d c 
+c c c c c c c c c c c c c c c c 
+c b b b f f f f f f f f b b b c 
+c d d b f f f f f f f f b d d c 
+c d d b f f f f f f f f b d d c 
+c d d b f f f f f f f f b d d c 
+c d d b f f f f f f f f b d d c 
+c b b c f f f f f f f f c b b c 
+c d d b f f f f f f f f b d d c 
+c d d b f f f f f c c f b d d c 
+c d d b f c c c f f f f b d d c 
+c d d b c c c f f c c c b d d c 
+a c c a c c c c c c c c a c c a 
+`;
+            case "image9":
+            case "myImage0":return img`
+3333333333333333
+3a111112211111a3
+31a1111221111a13
+311a11122111a113
+3111a112211a1113
+31111a1221a11113
+311111a22a111113
+3999999229999993
+3999999229999993
+311111a22a111113
+31111a1221a11113
+3111a112211a1113
+311a11122111a113
+31a1111221111a13
+3a111112211111a3
+3333333333333333
+3333333333333333
+3a111112211111a3
+31a1111221111a13
+311a11122111a113
+3111a112211a1113
+31111a1221a11113
+311111a22a111113
+3999999229999993
+3999999229999993
+311111a22a111113
+31111a1221a11113
+3111a112211a1113
+311a11122111a113
+31a1111221111a13
+3a111112211111a3
+3333333333333333
+`;
+            case "image10":
+            case "openbox":return img`
+. b b b b b b b b b b b b b b . 
+b e 4 4 4 4 4 4 4 4 4 4 4 4 4 b 
+b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+b e e 4 4 4 4 4 4 4 4 4 4 e e b 
+b b b b b b b d d b b b b b b b 
+. b b b b b b c c b b b b b b . 
+b c c c c c b c c b c c c c c b 
+b c c c c c c b b c c c c c c b 
+b c c c c c c c c c c c c c c b 
+b c c c c c c c c c c c c c c b 
+b b b b b b b b b b b b b b b b 
+b e e e e e e e e e e e e e e b 
+b e e e e e e e e e e e e e e b 
+b c e e e e e e e e e e e e c b 
+b b b b b b b b b b b b b b b b 
+. b b . . . . . . . . . . b b . 
 `;
         }
         return null;

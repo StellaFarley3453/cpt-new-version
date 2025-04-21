@@ -1,10 +1,32 @@
+
 //set things up
+namespace SpriteKind {
+    export const dialoguedoor = SpriteKind.create()
+    export const lever1 = SpriteKind.create()
+    export const lever2 = SpriteKind.create()
+    export const lever3 = SpriteKind.create()
+    export const box1 = SpriteKind.create()
+    export const box2 = SpriteKind.create()
+    export const torch = SpriteKind.create()
+    export const lockeddoor = SpriteKind.create()
+    export const wooddoor = SpriteKind.create()
+    export const boardedwall = SpriteKind.create()
+}
+let key = false
+let unlittorch = false
+let littorch = false
+let long_board = false
+let prybar = false
+
 tiles.setCurrentTilemap(tilemap`level`)
+
 let princess = sprites.create(assets.image`princess_facing_down`)
 scene.cameraFollowSprite(princess)
 controller.moveSprite(princess)
 tiles.placeOnTile(princess, tiles.getTileLocation(53, 7))
+
 let interactbox:Sprite = null
+
 let skeleton = sprites.create(img`
     ........................
     ........................
@@ -32,10 +54,25 @@ let skeleton = sprites.create(img`
     ........................
 `, SpriteKind.Enemy)
 skeleton.setPosition(48,94)
-let inventory = [0,0,0,0]
+
+let leverhitbox1 = sprites.create(assets.image`myImage`,SpriteKind.lever1)
+tiles.placeOnTile(leverhitbox1, tiles.getTileLocation(58, 6))
+leverhitbox1.setFlag(SpriteFlag.Invisible,true)
+
+let keybox = sprites.create(assets.image`myImage`,SpriteKind.box1)
+tiles.placeOnTile(keybox,tiles.getTileLocation(56,15))
+keybox.setFlag(SpriteFlag.Invisible,true)
+let dialogue1 = ["A voice chimes in from the other side of the door.\"Hello? is there at last someone in the cell next to mine to give me company?\"","\"So are you a princess or something? I heard the guards say something about you. I can't seem to remember what It was, though.\"","\"What? you think you can get out? Well, you wouldn't be the first. Ask me if you need any tips!\"","\"I've heard whispers of a lever in your room that opens one of the doors. There might be something useful in there to get you out.\"","\"Well you mustn't dawdle, if you plan to escape then get to it!\""]
+
+let keydoor = sprites.create(assets.image`myImage0`,SpriteKind.lockeddoor)
+tiles.placeOnTile(keydoor,tiles.getTileLocation(50,8))
+keydoor.y=keydoor.y-8
+keydoor.setFlag(SpriteFlag.Invisible,true)
+
 // this variable is to keep track of what direction the player sprite is facing.
 // 1 is up, 2 is right, 3 is down, 4 is left.
 let direction = 3
+
 
 //event handlers
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -84,7 +121,7 @@ if (direction == 1) {
     interactbox.lifespan = 500
     interactbox.setPosition(princess.x,princess.y-16)
     //i've commented below out to make the interactbox visible for testing purposes.
-    //interactbox.setFlag(SpriteFlag.Invisible,true)
+    interactbox.setFlag(SpriteFlag.Invisible,true)
 }
 if (direction == 2) {
     let interactbox = sprites.create(assets.image`myImage`, SpriteKind.Projectile)
@@ -105,13 +142,25 @@ if (direction == 4) {
     interactbox.setFlag(SpriteFlag.Invisible, true)
 }
 })
-//this is the part I need help with. it should be triggering but it isnt.
-scene.onOverlapTile(SpriteKind.Projectile, assets.tile`red_lever_up`, function (sprite:Sprite, location:tiles.Location) {
-    princess.sayText(":)")
+sprites.onOverlap(SpriteKind.Projectile,SpriteKind.lever1,opendoor1)
+sprites.onOverlap(SpriteKind.Projectile,SpriteKind.box1,function(sprite:Sprite,otherSprite:Sprite){
+    sprites.destroy(otherSprite)
+    key = true
+    tiles.setTileAt(tiles.getTileLocation(56,15), assets.image`openbox`)
+    music.play(music.melodyPlayable(music.thump), music.PlaybackMode.UntilDone)
+    pause(300)
+    game.showLongText("You got a key. How convenient.",DialogLayout.Bottom)
 })
-//functions
-function opendoor1() {
 
+//functions
+function opendoor1(sprite:Sprite,otherSprite:Sprite) {
+    sprites.destroy(otherSprite)
+    tiles.setTileAt(tiles.getTileLocation(58, 6),assets.image`orange_lever_down`)
+    tiles.setTileAt(tiles.getTileLocation(53, 10),assets.image`opendoor`)
+    tiles.setTileAt(tiles.getTileLocation(52, 10),assets.image`opendoor`)
+    tiles.setWallAt(tiles.getTileLocation(52, 10), false)
+    tiles.setWallAt(tiles.getTileLocation(53, 10), false)
+    music.play(music.melodyPlayable(music.smallCrash), music.PlaybackMode.UntilDone)
 }
 function opendoor2() {
 
