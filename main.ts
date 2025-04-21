@@ -63,11 +63,18 @@ let keybox = sprites.create(assets.image`myImage`,SpriteKind.box1)
 tiles.placeOnTile(keybox,tiles.getTileLocation(56,15))
 keybox.setFlag(SpriteFlag.Invisible,true)
 let dialogue1 = ["A voice chimes in from the other side of the door.\"Hello? is there at last someone in the cell next to mine to give me company?\"","\"So are you a princess or something? I heard the guards say something about you. I can't seem to remember what It was, though.\"","\"What? you think you can get out? Well, you wouldn't be the first. Ask me if you need any tips!\"","\"I've heard whispers of a lever in your room that opens one of the doors. There might be something useful in there to get you out.\"","\"Well you mustn't dawdle, if you plan to escape then get to it!\""]
+let dialogue2 = ["\"you have a key? well that's lovely! If I were you, I'd find the door it goes to.\"","\"After, you should try to find something useful in a nearby room.\""]
+let dialogue3 = []
+let dialoguespot1 = 0
+let dialoguespot2 = 0
+let dialoguespot3 = 0
 
 let keydoor = sprites.create(assets.image`myImage0`,SpriteKind.lockeddoor)
 tiles.placeOnTile(keydoor,tiles.getTileLocation(50,8))
 keydoor.y=keydoor.y-8
 keydoor.setFlag(SpriteFlag.Invisible,true)
+
+let dialogue_door = sprites.create(assets.image`myImage`,SpriteKind.dialoguedoor)
 
 // this variable is to keep track of what direction the player sprite is facing.
 // 1 is up, 2 is right, 3 is down, 4 is left.
@@ -115,7 +122,7 @@ controller.down.onEvent(ControllerButtonEvent.Released, function () {
     }
     //princess.setImage(assets.image`princess_facing_down`)
 })
-controller.B.onEvent(ControllerButtonEvent.Pressed,function(){
+controller.A.onEvent(ControllerButtonEvent.Pressed,function(){
 if (direction == 1) {
     let interactbox = sprites.create(assets.image`myImage`, SpriteKind.Projectile)
     interactbox.lifespan = 500
@@ -143,6 +150,7 @@ if (direction == 4) {
 }
 })
 sprites.onOverlap(SpriteKind.Projectile,SpriteKind.lever1,opendoor1)
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.dialoguedoor, dialogue)
 sprites.onOverlap(SpriteKind.Projectile,SpriteKind.box1,function(sprite:Sprite,otherSprite:Sprite){
     sprites.destroy(otherSprite)
     key = true
@@ -172,6 +180,7 @@ function opendoor2(sprite:Sprite,otherSprite:Sprite) {
         tiles.setWallAt(tiles.getTileLocation(50, 8), false)
     }
     else{
+        sprites.destroy(sprite)
         game.showLongText("locked...",DialogLayout.Bottom)
     }
 }
@@ -189,4 +198,16 @@ function laydownboard() {
 }
 function victory() {
 
+}
+function dialogue(sprite:Sprite,otherSprite:Sprite) {
+    sprites.destroy(sprite)
+    if (dialoguespot1 < 5){
+        game.showLongText(dialogue1[dialoguespot1],DialogLayout.Bottom)
+        dialoguespot1++
+    }
+    else{
+        if (key && !unlittorch) {
+            
+        }
+    }
 }
