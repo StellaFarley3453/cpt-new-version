@@ -75,7 +75,7 @@ keydoor.y=keydoor.y-8
 keydoor.setFlag(SpriteFlag.Invisible,true)
 
 let dialogue_door = sprites.create(assets.image`myImage`,SpriteKind.dialoguedoor)
-
+tiles.placeOnTile(dialogue_door,tiles.getTileLocation(53,3))
 // this variable is to keep track of what direction the player sprite is facing.
 // 1 is up, 2 is right, 3 is down, 4 is left.
 let direction = 3
@@ -203,11 +203,15 @@ function dialogue(sprite:Sprite,otherSprite:Sprite) {
     sprites.destroy(sprite)
     if (dialoguespot1 < 5){
         game.showLongText(dialogue1[dialoguespot1],DialogLayout.Bottom)
-        dialoguespot1++
+        if (dialoguespot1<4){
+            dialoguespot1++
+        }
+        
     }
     else{
         if (key && !unlittorch) {
-            
+            game.showLongText(dialogue2[dialoguespot2],DialogLayout.Bottom)
+            dialoguespot2++
         }
     }
 }
