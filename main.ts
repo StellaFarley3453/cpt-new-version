@@ -57,12 +57,15 @@ skeleton.setPosition(48,94)
 
 let leverhitbox1 = sprites.create(assets.image`myImage`,SpriteKind.lever1)
 tiles.placeOnTile(leverhitbox1, tiles.getTileLocation(58, 6))
-leverhitbox1.setFlag(SpriteFlag.Invisible,true)
+leverhitbox1.setFlag(SpriteFlag.Invisible,true) 
 
 let keybox = sprites.create(assets.image`myImage`,SpriteKind.box1)
 tiles.placeOnTile(keybox,tiles.getTileLocation(56,15))
 keybox.setFlag(SpriteFlag.Invisible,true)
-let dialogue1 = ["A voice chimes in from the other side of the door.\"Hello? is there at last someone in the cell next to mine to give me company?\"","\"So are you a princess or something? I heard the guards say something about you. I can't seem to remember what It was, though.\"","\"What? you think you can get out? Well, you wouldn't be the first. Ask me if you need any tips!\"","\"I've heard whispers of a lever in your room that opens one of the doors. There might be something useful in there to get you out.\"","\"Well you mustn't dawdle, if you plan to escape then get to it!\""]
+let dialogue1 = ["A voice chimes in from the other side of the door.\"Hello? is there at last someone in the cell next to mine to give me company?\"",
+"\"So are you a princess or something? I heard the guards say something about you. I can't seem to remember what It was, though.\"","\"What? you think you can get out? Well, you wouldn't be the first. Ask me if you need any tips!\"",
+"\"I've heard whispers of a lever in your room that opens one of the doors. There might be something useful in there to get you out.\"",
+"\"Well you mustn't dawdle, if you plan to escape then get to it!\""]
 let dialogue2 = ["\"you have a key? well that's lovely! If I were you, I'd find the door it goes to.\"","\"After, you should try to find something useful in a nearby room.\""]
 let dialogue3 = []
 let dialoguespot1 = 0
@@ -76,6 +79,7 @@ keydoor.setFlag(SpriteFlag.Invisible,true)
 
 let dialogue_door = sprites.create(assets.image`myImage`,SpriteKind.dialoguedoor)
 tiles.placeOnTile(dialogue_door,tiles.getTileLocation(53,3))
+dialogue_door.setFlag(SpriteFlag.Invisible,true)
 // this variable is to keep track of what direction the player sprite is facing.
 // 1 is up, 2 is right, 3 is down, 4 is left.
 let direction = 3
@@ -161,23 +165,22 @@ sprites.onOverlap(SpriteKind.Projectile,SpriteKind.box1,function(sprite:Sprite,o
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.lockeddoor, opendoor2)
 //functions
-function opendoor1(sprite:Sprite,otherSprite:Sprite) {
+function opendoor(sprite:Sprite,otherSprite:Sprite,location1:tiles.Location,location2:tiles.Location,image1:Image,image2:Image){
     sprites.destroy(otherSprite)
-    tiles.setTileAt(tiles.getTileLocation(58, 6),assets.image`orange_lever_down`)
-    tiles.setTileAt(tiles.getTileLocation(53, 10),assets.image`opendoor`)
-    tiles.setTileAt(tiles.getTileLocation(52, 10),assets.image`opendoor`)
-    tiles.setWallAt(tiles.getTileLocation(52, 10), false)
-    tiles.setWallAt(tiles.getTileLocation(53, 10), false)
+    sprites.destroy(sprite)
+    tiles.setTileAt(location1,image1)
+    tiles.setTileAt(location2,image2)
+    tiles.setWallAt(location1,false)
+    tiles.setWallAt(location2,false)
     music.play(music.melodyPlayable(music.smallCrash), music.PlaybackMode.UntilDone)
+}
+function opendoor1(sprite:Sprite,otherSprite:Sprite) {
+    tiles.setTileAt(tiles.getTileLocation(58, 6),assets.image`orange_lever_down`)
+    opendoor(sprite, otherSprite, tiles.getTileLocation(52, 10), tiles.getTileLocation(53, 10), assets.image`opendoor`, assets.image`opendoor`)
 }
 function opendoor2(sprite:Sprite,otherSprite:Sprite) {
     if (key){
-        sprites.destroy(otherSprite)
-        sprites.destroy(sprite)
-        tiles.setTileAt(tiles.getTileLocation(50,8),assets.image`opendoor`)
-        tiles.setTileAt(tiles.getTileLocation(50, 7), assets.image`opendoor`)
-        tiles.setWallAt(tiles.getTileLocation(50,7),false)
-        tiles.setWallAt(tiles.getTileLocation(50, 8), false)
+        opendoor(sprite, otherSprite, tiles.getTileLocation(50, 7), tiles.getTileLocation(50, 8), assets.image`opendoor`, assets.image`opendoor`)
     }
     else{
         sprites.destroy(sprite)
