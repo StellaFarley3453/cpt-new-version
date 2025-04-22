@@ -201,7 +201,7 @@ function victory() {
 }
 function dialogue(sprite:Sprite,otherSprite:Sprite) {
     sprites.destroy(sprite)
-    if (dialoguespot1 < 5){
+    if (dialoguespot1 < 5 && !key){
         game.showLongText(dialogue1[dialoguespot1],DialogLayout.Bottom)
         if (dialoguespot1<4){
             dialoguespot1++
