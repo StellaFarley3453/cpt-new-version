@@ -214,7 +214,9 @@ function dialogue(sprite:Sprite,otherSprite:Sprite) {
     else{
         if (key && !unlittorch) {
             game.showLongText(dialogue2[dialoguespot2],DialogLayout.Bottom)
-            dialoguespot2++
+            if (dialoguespot2 < 2){
+                dialoguespot2++
+            }
         }
     }
 }
