@@ -66,7 +66,7 @@ let dialogue1 = ["A voice chimes in from the other side of the door.\"Hello? is 
 "\"So are you a princess or something? I heard the guards say something about you. I can't seem to remember what It was, though.\"","\"What? you think you can get out? Well, you wouldn't be the first. Ask me if you need any tips!\"",
 "\"I've heard whispers of a lever in your room that opens one of the doors. There might be something useful in there to get you out.\"",
 "\"Well you mustn't dawdle, if you plan to escape then get to it!\""]
-let dialogue2 = ["\"you have a key? well that's lovely! If I were you, I'd find the door it goes to.\"","\"After, you should try to find something useful in a nearby room.\""]
+let dialogue2 = ["\"you have a key? well that's lovely! If I were you, I'd find the door it goes to.\"","\"After, you should try to find something useful in a nearby room.\"","\"Go on, then.\""]
 let dialogue3 = []
 let dialoguespot1 = 0
 let dialoguespot2 = 0
@@ -214,7 +214,7 @@ function dialogue(sprite:Sprite,otherSprite:Sprite) {
     else{
         if (key && !unlittorch) {
             game.showLongText(dialogue2[dialoguespot2],DialogLayout.Bottom)
-            if (dialoguespot2 < 2){
+            if (dialoguespot2 < dialogue2.length - 1) {
                 dialoguespot2++
             }
         }
