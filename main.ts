@@ -11,6 +11,7 @@ namespace SpriteKind {
     export const lockeddoor = SpriteKind.create()
     export const wooddoor = SpriteKind.create()
     export const boardedwall = SpriteKind.create()
+    export const lava = SpriteKind.create()
 }
 let key = false
 let unlittorch = false
@@ -20,7 +21,7 @@ let prybar = false
 
 tiles.setCurrentTilemap(tilemap`level`)
 
-let princess = sprites.create(assets.image`princess_facing_down`)
+let princess = sprites.create(assets.image`princess_facing_down`,SpriteKind.Player)
 scene.cameraFollowSprite(princess)
 controller.moveSprite(princess)
 tiles.placeOnTile(princess, tiles.getTileLocation(53, 7))
@@ -153,6 +154,10 @@ if (direction == 4) {
     interactbox.setFlag(SpriteFlag.Invisible, true)
 }
 })
+sprites.onOverlap(SpriteKind.Player,SpriteKind.lava,function(sprite:Sprite,otherSprite:Sprite){
+    sprites.destroy(sprite)
+    game.gameOver(false)
+})
 sprites.onOverlap(SpriteKind.Projectile,SpriteKind.lever1,opendoor1)
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.dialoguedoor, dialogue)
 sprites.onOverlap(SpriteKind.Projectile,SpriteKind.box1,function(sprite:Sprite,otherSprite:Sprite){
@@ -219,4 +224,15 @@ function dialogue(sprite:Sprite,otherSprite:Sprite) {
             }
         }
     }
+}
+while(true){
+    pause(1000)
+    let lava1 = sprites.create(assets.image`lava1`,SpriteKind.lava)
+    let lava2 = sprites.create(assets.image`lava2`,SpriteKind.lava)
+    lava1.startEffect(effects.fire,200)
+    lava2.startEffect(effects.fire,200)
+    tiles.placeOnTile(lava1, tiles.getTileLocation(45, 7))
+    tiles.placeOnTile(lava2, tiles.getTileLocation(45, 8))
+    pause(1000)
+    sprites.destroyAllSpritesOfKind(SpriteKind.lava)
 }

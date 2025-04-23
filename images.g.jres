@@ -49,6 +49,16 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "openbox"
     },
+    "image11": {
+        "data": "hwQQABAAAABQJERCRVREREAiREJVVVVVICIiVEVFVVUgJERVRCJURCBCVEQiQiJFIERFJCIkJEUgVEUiJEIiRUBUJCIiIkJFQEUkIiIiQkVARSJEIiRCRUBFIkQiIlJFQFVEIiJCVCRARVVFRFRVJEBVRFVVVUQiUEREVEVVJEJQRCJCRVQkQg==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "lava1"
+    },
+    "image12": {
+        "data": "hwQQABAAAABFJEJCRVRFAEQiIiJEQlUAREIiIkRCRABFIiJEJCJCAEVERFQkQkIAVERUVSQiQgBUVVVVRCJUAERERFVFQlQAJCJCRFVEVAAiIkIkVFVVACJERCJCVUUAIlREQkJVJABEVUUiQkVCAERVRSJERSIARFVEIlRFIgBURSRCVFVEAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "lava2"
+    },
     "anim1": {
         "namespace": "myAnimations",
         "id": "anim1",
