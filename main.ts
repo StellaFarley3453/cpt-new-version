@@ -18,7 +18,8 @@ let unlittorch = false
 let littorch = false
 let long_board = false
 let prybar = false
-
+let lavaremote = false
+let lavalist:Array<Sprite> = []
 tiles.setCurrentTilemap(tilemap`level`)
 
 let princess = sprites.create(assets.image`princess_facing_down`,SpriteKind.Player)
@@ -186,6 +187,7 @@ function opendoor1(sprite:Sprite,otherSprite:Sprite) {
 function opendoor2(sprite:Sprite,otherSprite:Sprite) {
     if (key){
         opendoor(sprite, otherSprite, tiles.getTileLocation(50, 7), tiles.getTileLocation(50, 8), assets.image`opendoor`, assets.image`opendoor`)
+        lavatrap(!tiles.tileAtLocationIsWall(tiles.getTileLocation(50, 7)), tiles.getTileLocation(45, 7), tiles.getTileLocation(45, 8))
     }
     else{
         sprites.destroy(sprite)
@@ -219,20 +221,28 @@ function dialogue(sprite:Sprite,otherSprite:Sprite) {
     else{
         if (key && !unlittorch) {
             game.showLongText(dialogue2[dialoguespot2],DialogLayout.Bottom)
+            if (dialoguespot2 == 2){
+                lavaremote = true
+            }
             if (dialoguespot2 < dialogue2.length - 1) {
                 dialoguespot2++
+
             }
         }
     }
 }
-while(true){
-    pause(1000)
-    let lava1 = sprites.create(assets.image`lava1`,SpriteKind.lava)
-    let lava2 = sprites.create(assets.image`lava2`,SpriteKind.lava)
-    lava1.startEffect(effects.fire,200)
-    lava2.startEffect(effects.fire,200)
-    tiles.placeOnTile(lava1, tiles.getTileLocation(45, 7))
-    tiles.placeOnTile(lava2, tiles.getTileLocation(45, 8))
-    pause(1000)
-    sprites.destroyAllSpritesOfKind(SpriteKind.lava)
+function lavatrap(isdooropen:boolean,location1:tiles.Location,location2:tiles.Location){
+    while(isdooropen){
+        pause(1000)
+        //let lava1 = sprites.create(assets.image`lava1`,SpriteKind.lava)
+        lavalist.push(sprites.create(assets.image`lava1`, SpriteKind.lava))
+        lavalist[lavalist.length - 1].startEffect(effects.fire, 200)
+        tiles.placeOnTile(lavalist[lavalist.length - 1], location1)
+        lavalist.push(sprites.create(assets.image`lava2`, SpriteKind.lava))
+        lavalist[lavalist.length - 1].startEffect(effects.fire, 200)
+        tiles.placeOnTile(lavalist[lavalist.length - 1], location2)
+        //let lava2 = sprites.create(assets.image`lava2`,SpriteKind.lava)
+        pause(1000)
+    }
 }
+lavatrap(true, tiles.getTileLocation(32, 7), tiles.getTileLocation(32, 8))
