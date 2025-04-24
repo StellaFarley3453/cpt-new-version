@@ -238,9 +238,11 @@ function lavatrap(isdooropen:boolean,location1:tiles.Location,location2:tiles.Lo
         lavalist.push(sprites.create(assets.image`lava1`, SpriteKind.lava))
         lavalist[lavalist.length - 1].startEffect(effects.fire, 200)
         tiles.placeOnTile(lavalist[lavalist.length - 1], location1)
+        lavalist[lavalist.length - 1].lifespan = 1000
         lavalist.push(sprites.create(assets.image`lava2`, SpriteKind.lava))
         lavalist[lavalist.length - 1].startEffect(effects.fire, 200)
         tiles.placeOnTile(lavalist[lavalist.length - 1], location2)
+        lavalist[lavalist.length - 1].lifespan = 1000
         //let lava2 = sprites.create(assets.image`lava2`,SpriteKind.lava)
         pause(1000)
     }
