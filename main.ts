@@ -82,8 +82,6 @@ keydoor.setFlag(SpriteFlag.Invisible,true)
 let dialogue_door = sprites.create(assets.image`myImage`,SpriteKind.dialoguedoor)
 tiles.placeOnTile(dialogue_door,tiles.getTileLocation(53,3))
 dialogue_door.setFlag(SpriteFlag.Invisible,true)
-// this variable is to keep track of what direction the player sprite is facing.
-// 1 is up, 2 is right, 3 is down, 4 is left.
 let direction = 3
 
 
@@ -108,32 +106,27 @@ controller.left.onEvent(ControllerButtonEvent.Released, function () {
     if (!controller.up.isPressed() && !controller.left.isPressed() && !controller.right.isPressed() && !controller.down.isPressed()){
     animation.stopAnimation(animation.AnimationTypes.All, princess)
     }
-    //princess.setImage(assets.image`princess_facing_left`)
 })
 controller.right.onEvent(ControllerButtonEvent.Released, function () {
     if (!controller.up.isPressed() && !controller.left.isPressed() && !controller.right.isPressed() && !controller.down.isPressed()) {
         animation.stopAnimation(animation.AnimationTypes.All, princess)
     }
-    //princess.setImage(assets.image`princess_facing_right`)
 })
 controller.up.onEvent(ControllerButtonEvent.Released, function () {
     if (!controller.up.isPressed() && !controller.left.isPressed() && !controller.right.isPressed() && !controller.down.isPressed()) {
         animation.stopAnimation(animation.AnimationTypes.All, princess)
     }
-    //princess.setImage(assets.image`princess_facing_up`)
 })
 controller.down.onEvent(ControllerButtonEvent.Released, function () {
     if (!controller.up.isPressed() && !controller.left.isPressed() && !controller.right.isPressed() && !controller.down.isPressed()) {
         animation.stopAnimation(animation.AnimationTypes.All, princess)
     }
-    //princess.setImage(assets.image`princess_facing_down`)
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed,function(){
 if (direction == 1) {
     let interactbox = sprites.create(assets.image`myImage`, SpriteKind.Projectile)
     interactbox.lifespan = 500
     interactbox.setPosition(princess.x,princess.y-16)
-    //i've commented below out to make the interactbox visible for testing purposes.
     interactbox.setFlag(SpriteFlag.Invisible,true)
 }
 if (direction == 2) {
@@ -233,8 +226,6 @@ function dialogue(sprite:Sprite,otherSprite:Sprite) {
 }
 function lavatrap(isdooropen:boolean,location1:tiles.Location,location2:tiles.Location){
     while(isdooropen){
-        pause(1000)
-        //let lava1 = sprites.create(assets.image`lava1`,SpriteKind.lava)
         lavalist.push(sprites.create(assets.image`lava1`, SpriteKind.lava))
         lavalist[lavalist.length - 1].startEffect(effects.fire, 200)
         tiles.placeOnTile(lavalist[lavalist.length - 1], location1)
@@ -243,8 +234,7 @@ function lavatrap(isdooropen:boolean,location1:tiles.Location,location2:tiles.Lo
         lavalist[lavalist.length - 1].startEffect(effects.fire, 200)
         tiles.placeOnTile(lavalist[lavalist.length - 1], location2)
         lavalist[lavalist.length - 1].lifespan = 1000
-        //let lava2 = sprites.create(assets.image`lava2`,SpriteKind.lava)
-        pause(1000)
+        pause(2000)
     }
 }
 lavatrap(true, tiles.getTileLocation(32, 7), tiles.getTileLocation(32, 8))
