@@ -1,5 +1,3 @@
-
-//set things up
 namespace SpriteKind {
     export const dialoguedoor = SpriteKind.create()
     export const lever1 = SpriteKind.create()
@@ -64,11 +62,14 @@ leverhitbox1.setFlag(SpriteFlag.Invisible,true)
 let keybox = sprites.create(assets.image`myImage`,SpriteKind.box1)
 tiles.placeOnTile(keybox,tiles.getTileLocation(56,15))
 keybox.setFlag(SpriteFlag.Invisible,true)
-let dialogue1 = ["A voice chimes in from the other side of the door.\"Hello? is there at last someone in the cell next to mine to give me company?\"",
-"\"So are you a princess or something? I heard the guards say something about you. I can't seem to remember what It was, though.\"","\"What? you think you can get out? Well, you wouldn't be the first. Ask me if you need any tips!\"",
+let dialogue1 = 
+["A voice chimes in from the other side of the door.\"Hello? is there at last someone in the cell next to mine to give me company?\"",
+"\"So are you a princess or something? I heard the guards say something about you. I can't seem to remember what It was, though.\"",
+"\"What? you think you can get out? Well, you wouldn't be the first. Ask me if you need any tips!\"",
 "\"I've heard whispers of a lever in your room that opens one of the doors. There might be something useful in there to get you out.\"",
 "\"Well you mustn't dawdle, if you plan to escape then get to it!\""]
-let dialogue2 = ["\"you have a key? well that's lovely! If I were you, I'd find the door it goes to.\"","\"After, you should try to find something useful in a nearby room.\"","\"Go on, then.\""]
+let dialogue2 = ["\"you have a key? well that's lovely! If I were you, I'd find the door it goes to.\"",
+"\"After, you should try to find something useful in a nearby room.\"","\"Go on, then.\""]
 let dialogue3 = []
 let dialoguespot1 = 0
 let dialoguespot2 = 0
@@ -83,9 +84,6 @@ let dialogue_door = sprites.create(assets.image`myImage`,SpriteKind.dialoguedoor
 tiles.placeOnTile(dialogue_door,tiles.getTileLocation(53,3))
 dialogue_door.setFlag(SpriteFlag.Invisible,true)
 let direction = 3
-
-
-//event handlers
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     direction = 4
     animation.runImageAnimation(princess,assets.animation`princess_Walk_Left`,100,true)
@@ -180,7 +178,9 @@ function opendoor1(sprite:Sprite,otherSprite:Sprite) {
 function opendoor2(sprite:Sprite,otherSprite:Sprite) {
     if (key){
         opendoor(sprite, otherSprite, tiles.getTileLocation(50, 7), tiles.getTileLocation(50, 8), assets.image`opendoor`, assets.image`opendoor`)
-        lavatrap(!tiles.tileAtLocationIsWall(tiles.getTileLocation(50, 7)), tiles.getTileLocation(45, 7), tiles.getTileLocation(45, 8))
+        lavatrap(!tiles.tileAtLocationIsWall(tiles.getTileLocation(50, 7)), 
+        tiles.getTileLocation(45, 7), 
+        tiles.getTileLocation(45, 8))
     }
     else{
         sprites.destroy(sprite)
